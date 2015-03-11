@@ -50,8 +50,6 @@ function init() {
     controls.connect();
     controls.update();
 
-    element.addEventListener('click', fullscreen, false);
-
     window.removeEventListener('deviceorientation', setOrientationControls, true);
   }
   window.addEventListener('deviceorientation', setOrientationControls, true);
@@ -114,16 +112,4 @@ function animate(t) {
 
   update(clock.getDelta());
   render(clock.getDelta());
-}
-
-function fullscreen() {
-  if (container.requestFullscreen) {
-    container.requestFullscreen();
-  } else if (container.msRequestFullscreen) {
-    container.msRequestFullscreen();
-  } else if (container.mozRequestFullScreen) {
-    container.mozRequestFullScreen();
-  } else if (container.webkitRequestFullscreen) {
-    container.webkitRequestFullscreen();
-  }
 }
