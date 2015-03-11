@@ -15,15 +15,10 @@ function init() {
   container = document.getElementById('example');
   container.appendChild(element);
 
-  //  OPTIMISED FOR NOTE 4 + RITECH 3D
+  //  POENTIAL OPTIMISATION FOR NOTE 4 + RITECH 3D
   // this.separation = 3;
   // this.focalLength = 39;
   effect = new THREE.StereoEffect(renderer);
-
-  // this.separation = 3;
-  // this.focalLength = 39;
-
-
 
   scene = new THREE.Scene();
 
@@ -54,10 +49,11 @@ function init() {
   }
   window.addEventListener('deviceorientation', setOrientationControls, true);
 
-
+  // add light
   var light = new THREE.HemisphereLight(0x777777, 0x000000, 0.6);
   scene.add(light);
 
+  // add plane
   var texture = THREE.ImageUtils.loadTexture(
     'textures/patterns/checker.png'
   );
@@ -80,6 +76,25 @@ function init() {
   mesh.rotation.x = -Math.PI / 2;
   scene.add(mesh);
 
+
+  // add ball
+  var material = new THREE.MeshPhongMaterial({
+    shading: THREE.SmoothShading,
+    blending: THREE.AdditiveBlending,
+    ambient: 0x000000,
+    specular: 0xffffff,
+    shininess: 5,
+    vertexColors: false
+  });
+
+  var geometry = new THREE.SphereGeometry(10, 32, 32);
+  var mesh = new THREE.Mesh(geometry, material);
+  mesh.position.x = 20
+  mesh.position.y = 10
+  scene.add(mesh);
+
+
+
   window.addEventListener('resize', resize, false);
   setTimeout(resize, 1);
 }
@@ -99,6 +114,9 @@ function update(dt) {
   resize();
 
   camera.updateProjectionMatrix();
+
+  // TODO send position to meteor
+  console.log('camera', camera.position, camera.rotation)
 
   controls.update(dt);
 }
