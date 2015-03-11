@@ -1,3 +1,5 @@
+# "App Mode"
+
 launchIntoFullscreen = (element) ->
   if element.requestFullscreen
     element.requestFullscreen()
@@ -17,7 +19,6 @@ lockOrientation = (orientation) ->
     window.screen.orientation.lock(orientation)
   else if window.screen.msLockOrientation
     window.screen.msLockOrientation(orientation)
-
 
 $(document).click ->
   if App.helpers.isMobile() and !App.helpers.isIos()
