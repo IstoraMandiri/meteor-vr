@@ -1,4 +1,15 @@
-# "App Mode"
+W.initContainer = (element) ->
+  W.renderer = new THREE.WebGLRenderer
+  W.element = W.renderer.domElement
+  W.container = element
+  W.container.appendChild W.element
+  window.addEventListener 'resize', resize, false
+  setTimeout resize, 1
+  $(document).click ->
+    if App.helpers.isMobile() and !App.helpers.isIos()
+      launchIntoFullscreen document.documentElement
+      lockOrientation 'landscape-primary'
+
 
 launchIntoFullscreen = (element) ->
   if element.requestFullscreen
@@ -20,7 +31,10 @@ lockOrientation = (orientation) ->
   else if window.screen.msLockOrientation
     window.screen.msLockOrientation(orientation)
 
-$(document).click ->
-  if App.helpers.isMobile() and !App.helpers.isIos()
-    launchIntoFullscreen document.documentElement
-    lockOrientation 'landscape-primary'
+resize = ->
+  width = W.container.offsetWidth
+  height = W.container.offsetHeight
+  W.camera.aspect = width / height
+  W.camera.updateProjectionMatrix()
+  W.renderer.setSize width, height
+  W.effect.setSize width, height
