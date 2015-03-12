@@ -10,7 +10,6 @@ W.initContainer = (element) ->
       launchIntoFullscreen document.documentElement
       lockOrientation 'landscape-primary'
 
-
 launchIntoFullscreen = (element) ->
   if element.requestFullscreen
     element.requestFullscreen()
