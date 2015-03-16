@@ -1,16 +1,24 @@
+W.isPresenter = App.helpers.getURLParameter('p')?
+W.isVr = App.helpers.getURLParameter('vr')?
+
 W.init = (element) ->
+
   # initialize dom
   W.initContainer element
 
   # set the scene
   W.scene = new THREE.Scene
-  W.effect = new THREE.StereoEffect W.renderer
+  if W.usingVR
+    W.effect = new THREE.StereoEffect W.renderer
+  else
+    W.effect = W.renderer
 
   # add a camera
   W.addCamera()
 
   # add controller
-  W.addUserInput()
+  if W.isPresenter
+    W.addUserInput()
 
   # populate scene
   W.populate()

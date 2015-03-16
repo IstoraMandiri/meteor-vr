@@ -1,3 +1,5 @@
+W.usingVR = App.helpers.getURLParameter('vr')?
+
 W.addUserInput = ->
   W.controls = new THREE.OrbitControls(W.camera, W.element)
   W.controls.rotateUp Math.PI / 4
