@@ -7,8 +7,12 @@ W.initContainer = (element) ->
   setTimeout resize, 1
   $(document).click ->
     if App.helpers.isMobile() and !App.helpers.isIos()
-      launchIntoFullscreen document.documentElement
-      lockOrientation 'landscape-primary'
+      setTimeout ->
+        launchIntoFullscreen document.documentElement
+        setTimeout ->
+          lockOrientation 'landscape-primary'
+        , 100
+      , 100
 
 launchIntoFullscreen = (element) ->
   if element.requestFullscreen
