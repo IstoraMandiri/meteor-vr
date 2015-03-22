@@ -17,7 +17,7 @@ W.init = (element) ->
   W.addCamera()
 
   # add controller
-  if W.isPresenter
+  if W.isPresenter or W.isVr
     W.addUserInput()
 
   # populate scene
