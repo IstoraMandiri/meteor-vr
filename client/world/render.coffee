@@ -20,6 +20,7 @@ updatePos = ->
         W.camera.position.z
       ]
 
+first = true
 W.render = (t) ->
   # update world
 
@@ -34,7 +35,12 @@ W.render = (t) ->
     # set the camera position to that of the presenter
     pres = Cols.players.findOne 'presenter'
     if pres
-      W.camera.rotation.set pres.rot[0], pres.rot[1], pres.rot[2], pres.rot[3]
+      # if using vr, use the
+      if W.isVr
+        W.controls.update clock.getDelta()
+      else
+        W.camera.rotation.set pres.rot[0], pres.rot[1], pres.rot[2], pres.rot[3]
+
       W.camera.position.set pres.pos[0], pres.pos[1], pres.pos[2]
 
   # apply vr stuffs
@@ -43,6 +49,7 @@ W.render = (t) ->
 
   # render world
   W.effect.render W.scene, W.camera
+
   # tick
   requestAnimationFrame W.render
 

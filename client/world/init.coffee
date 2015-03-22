@@ -1,14 +1,16 @@
-W.isPresenter = App.helpers.getURLParameter('p')?
-W.isVr = App.helpers.getURLParameter('vr')?
 
 W.init = (element) ->
+  W.isPresenter = App.helpers.getURLParameter('p')?
+  W.isVr = App.helpers.isMobile() || App.helpers.getURLParameter('vr')?
 
   # initialize dom
   W.initContainer element
 
   # set the scene
   W.scene = new THREE.Scene
-  if W.usingVR
+
+  # add effect
+  if W.isVr
     W.effect = new THREE.StereoEffect W.renderer
   else
     W.effect = W.renderer
