@@ -8,10 +8,16 @@ updatePos = ->
   Cols.players.update 'presenter',
     $set:
       rot: [
-        W.camera.rotation.x,
-        W.camera.rotation.y,
-        W.camera.rotation.z,
+        W.camera.rotation.x
+        W.camera.rotation.y
+        W.camera.rotation.z
         W.camera.rotation.order
+      ]
+      ,
+      pos: [
+        W.camera.position.x
+        W.camera.position.y
+        W.camera.position.z
       ]
 
 W.render = (t) ->
@@ -29,6 +35,7 @@ W.render = (t) ->
     pres = Cols.players.findOne 'presenter'
     if pres
       W.camera.rotation.set pres.rot[0], pres.rot[1], pres.rot[2], pres.rot[3]
+      W.camera.position.set pres.pos[0], pres.pos[1], pres.pos[2]
 
   # apply vr stuffs
   if W.isVr
