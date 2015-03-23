@@ -1,3 +1,7 @@
 # Init the world
 Template.world.rendered = ->
-  W.init @find('#world')
+  handle = @autorun =>
+    if Subs.players.ready()
+      # wait for subs until rendered
+      W.init @find('#world')
+      handle.stop()

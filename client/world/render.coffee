@@ -26,11 +26,17 @@ W.render = (t) ->
 
   # user input
   if W.isPresenter
+    # set the position if it's the first time
+    if first
+      first = false
+      pres = Cols.players.findOne 'presenter'
+      if pres
+        W.camera.position.set pres.pos[0], pres.pos[1], pres.pos[2]
+
     # send camera position to meteor if presenter
     updatePos()
-    pad = navigator.getGamepads()[0]
 
-    if pad
+    if pad = navigator.getGamepads()[0]
       W.camera.translateX pad.axes[0]
       W.camera.translateZ pad.axes[1]
       W.camera.translateY pad.buttons[0].value*-1 + pad.buttons[1].value
