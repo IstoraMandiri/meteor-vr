@@ -3,8 +3,6 @@ W.meshes.sphere = (options) ->
   material = new THREE.MeshPhongMaterial
     shading: THREE.SmoothShading
     blending: THREE.AdditiveBlending
-    ambient: 0x000000
-    specular: 0xffffff
     shininess: 5
     vertexColors: false
 
