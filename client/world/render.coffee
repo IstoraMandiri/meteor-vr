@@ -24,27 +24,29 @@ first = true
 W.render = (t) ->
   # update world
 
+  # user input
   if W.isPresenter
-    # user input
-    W.controls.update clock.getDelta()
     # send camera position to meteor if presenter
     updatePos()
-    # update camera
+    pad = navigator.getGamepads()[0]
 
+    if pad
+      W.camera.translateX pad.axes[0]
+      W.camera.translateZ pad.axes[1]
+      W.camera.translateY pad.buttons[0].value*-1 + pad.buttons[1].value
   else
     # set the camera position to that of the presenter
     pres = Cols.players.findOne 'presenter'
     if pres
       # if using vr, use the
-      if W.isVr
-        W.controls.update clock.getDelta()
-      else
+      unless W.isVr
         W.camera.rotation.set pres.rot[0], pres.rot[1], pres.rot[2], pres.rot[3]
 
       W.camera.position.set pres.pos[0], pres.pos[1], pres.pos[2]
 
   # apply vr stuffs
   if W.isVr
+    W.controls.update clock.getDelta()
     W.camera.updateProjectionMatrix()
 
   # render world
