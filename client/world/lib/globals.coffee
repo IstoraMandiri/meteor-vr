@@ -1,0 +1,3 @@
+@W = # World
+  meshes : {}
+  textures : {}

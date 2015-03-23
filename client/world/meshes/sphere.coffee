@@ -18,4 +18,4 @@ W.meshes.sphere = (options) ->
     mesh.position.y = options.y
 
 
-  return mesh
+  W.scene.add mesh

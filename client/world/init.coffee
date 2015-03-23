@@ -1,4 +1,3 @@
-
 W.init = (element) ->
   W.isPresenter = App.helpers.getURLParameter('p')?
   W.isVr = App.helpers.isMobile() || App.helpers.getURLParameter('vr')?
