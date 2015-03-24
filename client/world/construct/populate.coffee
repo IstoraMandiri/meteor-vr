@@ -8,14 +8,14 @@ W.populate = ->
   # pLight.position.set 0, 200, 0
   W.scene.add W.ambientLight
 
-  # flashlight = new THREE.SpotLight 0xffffff, 1, 500
-  # W.camera.add flashlight
-  # flashlight.position.set 0,0,1
-  # flashlight.target = W.camera
+  W.flashlight = new THREE.SpotLight 0xffffff, 1, 500
+  W.camera.add W.flashlight
+  W.flashlight.position.set 0,0,1
+  W.flashlight.target = W.camera
 
 
   # add plane
-  W.meshes.plane()
+  # W.meshes.plane()
 
   # add ball
   # W.meshes.sphere {x: 20, y: 10}
