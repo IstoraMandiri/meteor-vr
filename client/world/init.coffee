@@ -1,5 +1,5 @@
 W.init = (element) ->
-  W.isPresenter = App.helpers.getURLParameter('p')
+  W.thisPlayer = App.helpers.getURLParameter('p')
   W.isVr = App.helpers.isMobile() || App.helpers.getURLParameter('vr')?
 
   # initialize dom
@@ -18,7 +18,7 @@ W.init = (element) ->
   W.addCamera()
 
   # add controller
-  if W.isPresenter or W.isVr
+  if W.thisPlayer or W.isVr
     W.addUserInput()
 
   # populate scene

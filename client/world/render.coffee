@@ -7,7 +7,7 @@ playerId =
 updatePos = ->
   # TODO Potential optiomization
   # make this send only the diff; position might not change
-  Cols.players.update W.isPresenter,
+  Cols.players.update W.thisPlayer,
     $set:
       rot: [
         W.camera.rotation.x
@@ -56,11 +56,11 @@ W.render = (t) ->
 
 
   # user input
-  if W.isPresenter
+  if W.thisPlayer
     # set the position if it's the first time
     if first
       first = false
-      pres = Cols.players.findOne W.isPresenter
+      pres = Cols.players.findOne W.thisPlayer
       if pres
         W.camera.position.set pres.pos[0], pres.pos[1], pres.pos[2]
 
