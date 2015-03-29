@@ -52,7 +52,11 @@ W.render = (t) ->
 
     # always move the flashlight
 
-
+  # update webcam
+  if W.webcam? and W.webcam.video.readyState is W.webcam.video.HAVE_ENOUGH_DATA
+    W.webcam.videoImageContext.drawImage( W.webcam.video, 0, 0, W.webcam.videoImage.width, W.webcam.videoImage.height )
+    if ( W.webcam.videoTexture )
+      W.webcam.videoTexture.needsUpdate = true
 
 
   # user input
@@ -70,6 +74,11 @@ W.render = (t) ->
       W.camera.translateX pad.axes[0]
       W.camera.translateZ pad.axes[1]
       W.camera.translateY pad.buttons[0].value*-1 + pad.buttons[1].value
+
+      # show/hide webcam overlay
+      if W.webcam
+        W.webcam.mesh.visible = pad.buttons[3].pressed
+
     else
       # keyboard
       # console.log 'moving', kMov
