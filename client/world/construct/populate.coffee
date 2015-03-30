@@ -26,11 +26,12 @@ W.populate = ->
     if W.thisPlayer is playerId
       # attach webcam video feed view to camera
       # CAMERA
-      W.getWebcam (webcam) ->
-        # console.log 'adidng', webcam
-        W.webcam = webcam
-        W.camera.add W.webcam.mesh
-        W.webcam.mesh.position.set 0,0, -6
+      if W.isVr
+        W.getWebcam (webcam) ->
+          # console.log 'adidng', webcam
+          W.webcam = webcam
+          W.camera.add W.webcam.mesh
+          W.webcam.mesh.position.set 0,0, -6
     else
       # dont render own mesh
       material = new THREE.MeshPhongMaterial()
