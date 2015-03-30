@@ -8,3 +8,12 @@ meteor-platform
 insecure
 less
 coffeescript
+twbs:bootstrap
+iron:router
+accounts-ui
+accounts-twitter
+accounts-facebook
+accounts-github
+accounts-google
+pauli:accounts-linkedin
+joshowens:accounts-entry
