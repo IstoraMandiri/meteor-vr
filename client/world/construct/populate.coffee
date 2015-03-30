@@ -8,7 +8,6 @@ W.populate = ->
   # pLight.position.set 0, 200, 0
   W.scene.add W.ambientLight
 
-
   # add plane
   # W.meshes.plane()
 
@@ -21,25 +20,16 @@ W.populate = ->
   W.flashlight.position.set 0,0,1
   W.flashlight.target = W.camera
 
-  W.players = {}
-  for playerId in ['presenter', '1', '2']
-    if W.thisPlayer is playerId
-      # attach webcam video feed view to camera
-      # CAMERA
-      if W.isVr
-        W.getWebcam (webcam) ->
-          # console.log 'adidng', webcam
-          W.webcam = webcam
-          W.camera.add W.webcam.mesh
-          W.webcam.mesh.position.set 0,0, -6
-    else
-      # dont render own mesh
-      material = new THREE.MeshPhongMaterial()
-      geometry = new THREE.BoxGeometry(1,1,1)
-      mesh = new THREE.Mesh(geometry, material)
-      W.scene.add mesh
-      W.players[playerId] = {mesh: mesh}
+  if W.isVr
+    W.getWebcam (webcam) ->
+      # console.log 'adidng', webcam
+      W.webcam = webcam
+      W.camera.add W.webcam.mesh
+      W.webcam.mesh.position.set 0,0, -6
 
+
+  # add players
+  W.populatePlayers()
 
   # add car
   W.meshes.car {x: 100, y: 0}

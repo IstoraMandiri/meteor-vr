@@ -1,7 +1,9 @@
 # Init the world
 Template.world.rendered = ->
-  handle = @autorun =>
-    if Subs.players.ready()
+  $world = @find('#world')
+  first = true
+  @autorun ->
+    if first and Subs.players.ready()
+      first = false
       # wait for subs until rendered
-      W.init @find('#world')
-      handle.stop()
+      W.init $world

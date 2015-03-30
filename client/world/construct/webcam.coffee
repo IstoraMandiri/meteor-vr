@@ -42,7 +42,7 @@ W.getWebcam = (callback) ->
 
     initTexture()
 
-    camvideo.onerror = (e) -> stream.stop()
+    camvideo.onerror = (e) -> stream?.stop()
 
     stream.onended = noStream
 
