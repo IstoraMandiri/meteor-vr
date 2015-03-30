@@ -9,6 +9,15 @@ if Meteor.isServer
     Cols.players.insert {_id: '2'}
 
   Meteor.publish 'players', -> Cols.players.find()
+  # publish for avatar
+  Meteor.publish null, ->
+    Meteor.users.find {},
+      fields:
+        "services.twitter.profile_image_url_https":1
+        "services.facebook.id":1
+        "services.google.picture":1
+        "services.github.username":1
+        "services.instagram.profile_picture":1
 
 if Meteor.isClient
   @Subs =
